@@ -16,6 +16,23 @@ class Rifa {
         this.codigo = codigo;
         this.descripcion = descripcion;
     }
+    
+    public Rifa determinarPremio(int codigo){
+        Rifa rifa = null;
+        
+        switch (codigo) {
+            case 1:
+                rifa =new Rifa(codigo, "obsequio");
+                break;
+            case 2:
+                rifa =new Rifa(codigo, "bono");
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+        return rifa;
+    }
 
     public int getCodigo() {
         return codigo;

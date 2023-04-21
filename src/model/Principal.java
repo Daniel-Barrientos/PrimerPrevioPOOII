@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Principal {
         if (nino != null) {
             nino.setComida(comida);
             nino.setBebida(bebida);
-            System.out.println("Boleta: \n[Nombre: " + nino.getNombre() + nino.getApellido() + "]");
+            System.out.println("Boleta: \n[Nombre: " + nino.getNombre() + " " + nino.getApellido() + "]");
             System.out.println("[Comida: " + comida.toString() + ", Bebida: " + bebida.toString() + "]");
         }
     }
@@ -44,19 +45,30 @@ public class Principal {
         return null;
     }
 
-    public String realizarSorteo(int numRifa) {
-        String mensaje = "El número de rifa " + numRifa + " no se encontró en la lista de participantes.";
+    public int obtenerPremio() {
+        Random rand = new Random();
+        return rand.nextInt(listaNino.size()) + 1;
+    }
+
+    public String realizarSorteo() {
+        Random random = new Random();
+        int numRifa = random.nextInt(listaNino.size()) + 1;
+
         for (Nino nino : listaNino) {
-            if (nino.getEstado()) {
+            if (!nino.getEstado()) {
                 if (nino.getNumRifa() == numRifa) {
                     nino.setEstado(true);
-                    return "Ganó Rifa";
+                    int premio = obtenerPremio();
+                    nino.setRifa(new Rifa().determinarPremio(premio));
+                   return "¡Felicidades! El niño " + nino.getNombre() + " " + nino.getApellido() + " ha ganado " + nino.getRifa().getDescripcion() + ".";
 
                 }
+            } else {
+                return "El niño" + nino.getNombre() + " " + nino.getApellido() + "ya ha ganado una la rifa";
             }
 
         }
-        return null;
+        return "No hay ganador en esta rifa.";
     }
 
     public ArrayList<Nino> getListaNino() {
@@ -84,6 +96,12 @@ public class Principal {
         principal.seleccionarRefrigerio("938792", Bebida.Agua, Comida.Perro_Caliente);
 
         //se realiza el sorteo
+        principal.obtenerPremio();
+        principal.obtenerPremio();
+        principal.obtenerPremio();
+        principal.obtenerPremio();
+        principal.obtenerPremio();
+        principal.obtenerPremio();
     }
 
 }
