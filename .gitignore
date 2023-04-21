@@ -1,0 +1,5 @@
+# Compiled class file
+*.class
+
+# Se salta la carpeta build que esta en la raiz del proyecto en cuestion
+build
