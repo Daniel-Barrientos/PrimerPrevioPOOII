@@ -32,7 +32,7 @@ public class Principal {
             nino.setComida(comida);
             nino.setBebida(bebida);
             System.out.println("Boleta: \n[Nombre: " + nino.getNombre() + " " + nino.getApellido() + "]");
-            System.out.println("[Comida: " + comida.toString() + ", Bebida: " + bebida.toString() + "]");
+            System.out.println("[Comida: " + comida.toString() + ", Bebida: " + bebida.toString() + "]\n");
         }
     }
 
@@ -45,22 +45,29 @@ public class Principal {
         return null;
     }
 
+    //metodo para obtener un permio aletorio de las dos opciones (bono u obsequi)
     public int obtenerPremio() {
         Random rand = new Random();
         return rand.nextInt(listaNino.size()) + 1;
     }
 
+    //metodo para determinar al ganador, ponerle estado de gano un premio en caso de que ya haya ganado, sino cambia su estado y le da el premio
     public String realizarSorteo() {
+        //se usa la clase random para obtener un numero aleatorio que determine al ganador
         Random random = new Random();
         int numRifa = random.nextInt(listaNino.size()) + 1;
 
+        //se busca al ganador y se le pone true al estado que significa que ya gano el premio, en caso contrario no hay ganador
         for (Nino nino : listaNino) {
+            //se comprueba sino ha ganado un premio
             if (!nino.getEstado()) {
+                //se busca al niño ganador se le da el  premio y se le pone estado de que gano
                 if (nino.getNumRifa() == numRifa) {
-                    nino.setEstado(true);
+
                     int premio = obtenerPremio();
                     nino.setRifa(new Rifa().determinarPremio(premio));
-                   return "¡Felicidades! El niño " + nino.getNombre() + " " + nino.getApellido() + " ha ganado " + nino.getRifa().getDescripcion() + ".";
+                    nino.setEstado(true);
+                    return "¡Felicidades! El niño " + nino.getNombre() + " " + nino.getApellido() + " ha ganado " + nino.getRifa().getDescripcion() + ".";
 
                 }
             } else {
@@ -88,20 +95,21 @@ public class Principal {
         principal.agregarNino("312382", "Sergio", "Perez", 6, "315", 2);
         principal.agregarNino("120921", "Moises", "Torres", 8, "314", 4);
         principal.agregarNino("938792", "Isaac", "Parada", 14, "313", 3);
+        System.out.println("-------------------------------------\n");
 
         //se selecciona el refrigerio
         principal.seleccionarRefrigerio("391283", Bebida.Agua, Comida.Hamburguesa);
         principal.seleccionarRefrigerio("312382", Bebida.Gaseosa, Comida.Papitas_McDonald);
         principal.seleccionarRefrigerio("120921", Bebida.Gaseosa, Comida.Hamburguesa);
         principal.seleccionarRefrigerio("938792", Bebida.Agua, Comida.Perro_Caliente);
+        System.out.println("-------------------------------------\n");
 
         //se realiza el sorteo
-        principal.obtenerPremio();
-        principal.obtenerPremio();
-        principal.obtenerPremio();
-        principal.obtenerPremio();
-        principal.obtenerPremio();
-        principal.obtenerPremio();
+        System.out.println(principal.realizarSorteo());
+        System.out.println(principal.realizarSorteo());
+        
+        //
+        
     }
 
 }
