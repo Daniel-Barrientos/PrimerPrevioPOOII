@@ -4,7 +4,7 @@ package model;
  *
  * @author Daniel Barrientos - 1152143
  */
-class Rifa {
+public class Rifa {
 
     private int codigo;
     private String descripcion;
