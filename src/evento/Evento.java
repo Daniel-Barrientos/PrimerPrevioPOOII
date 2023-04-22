@@ -20,14 +20,14 @@ public class Evento {
     private ArrayList<Nino> listaNino;
 
     public static Evento instancia;
-    
+
     public static Evento obtenerInstancia() {
         if (instancia == null) {
             instancia = new Evento();
         }
         return instancia;
     }
-    
+
     public Evento() {
         this.listaNino = new ArrayList<>();
     }
@@ -40,7 +40,7 @@ public class Evento {
             JOptionPane.showMessageDialog(null, "Se ha registrado correctamente");
             //System.out.println("El niño ha sido agregado correcta mente");
         } else {
-            JOptionPane.showConfirmDialog(null, "No cumple con la edad permitida para el evento");
+            JOptionPane.showMessageDialog(null, "No cumple con la edad permitida para el evento");
             //System.err.println("No cumple con la edad permitida para el evento");
         }
 
@@ -52,9 +52,9 @@ public class Evento {
         if (nino != null) {
             nino.setComida(comida);
             nino.setBebida(bebida);
-            JOptionPane.showMessageDialog(null, "Boleta: \n[Nombre: " + nino.getNombre() + " " + nino.getApellido() + "]" + 
-                    "[Comida: " + comida.toString() + ", Bebida: " + bebida.toString() + "]\n");
-            
+            JOptionPane.showMessageDialog(null, "Boleta: \n[Nombre: " + nino.getNombre() + " " + nino.getApellido() + "]"
+                    + "[Comida: " + comida.toString() + ", Bebida: " + bebida.toString() + "]\n");
+
             //System.out.println("Boleta: \n[Nombre: " + nino.getNombre() + " " + nino.getApellido() + "]");
             //System.out.println("[Comida: " + comida.toString() + ", Bebida: " + bebida.toString() + "]\n");
         }
@@ -79,7 +79,7 @@ public class Evento {
     public String realizarSorteo() {
         //se usa la clase random para obtener un numero aleatorio que determine al ganador
         Random random = new Random();
-        int numRifa = random.nextInt(listaNino.size() + 1) + 1;
+        int numRifa = random.nextInt(10) + 1;
 
         //se busca al ganador y se le pone true al estado que significa que ya gano el premio, en caso contrario no hay ganador
         for (Nino nino : listaNino) {
@@ -90,7 +90,7 @@ public class Evento {
                     int premio = obtenerPremio();
                     nino.setRifa(new Rifa().determinarPremio(premio));
                     nino.setEstado(true);
-                    return "¡Felicidades! El niño " + nino.getNombre() + " " + nino.getApellido() + " ha ganado " + nino.getRifa().getDescripcion() + ".";
+                    return "¡Felicidades! El niño " + nino.getNombre() + " " + nino.getApellido() + " ha ganado " + nino.getRifa().getDescripcion() + " con el numero de rifa: " + numRifa + ".";
 
                 } else {
                     return "El niño " + nino.getNombre() + " " + nino.getApellido() + " ya ha ganado una la rifa";
@@ -98,7 +98,7 @@ public class Evento {
             }
 
         }
-        return "No hay ganador en esta rifa.";
+        return "No hay ganador en esta rifa." + numRifa;
     }
 
     public ArrayList<Nino> getListaNino() {
@@ -114,35 +114,35 @@ public class Evento {
         RegistroView registroView = new RegistroView();
         registroView.setVisible(true);
         RifaView rifaView = new RifaView();
-        
+
         RegistroController registroController = new RegistroController(registroView, rifaView);
-        
-        
-        
-        /*
-        
+
+        Evento principal = Evento.obtenerInstancia();
+
         //agrgamos niños al programa
-        principal.agregarNino("391283", "Paco", "Gonzales", 10, "310", 1);
-        principal.agregarNino("312382", "Sergio", "Perez", 6, "315", 2);
-        principal.agregarNino("120921", "Moises", "Torres", 8, "314", 4);
-        principal.agregarNino("938792", "Isaac", "Parada", 14, "313", 3);
-        principal.agregarNino("123", "brayan", "Torres", 5, "313", 3);
+        principal.agregarNino("123", "Paco", "Gonzales", 10, "310", 1);
+        principal.agregarNino("124", "Sergio", "Perez", 6, "315", 2);
+        principal.agregarNino("125", "Moises", "Torres", 14, "314", 4);
+        principal.agregarNino("125", "Moises", "Torres", 8, "314", 4);
+        principal.agregarNino("126", "brayan", "Torres", 5, "313", 3);
         System.out.println("-------------------------------------\n");
 
         //se selecciona el refrigerio
-        principal.seleccionarRefrigerio("391283", Bebida.Agua, Comida.Hamburguesa);
-        principal.seleccionarRefrigerio("312382", Bebida.Gaseosa, Comida.Papitas_McDonald);
-        principal.seleccionarRefrigerio("120921", Bebida.Gaseosa, Comida.Hamburguesa);
-        principal.seleccionarRefrigerio("938792", Bebida.Agua, Comida.Perro_Caliente);
+        principal.seleccionarRefrigerio("123", Bebida.Agua, Comida.Hamburguesa);
+        principal.seleccionarRefrigerio("124", Bebida.Gaseosa, Comida.Papitas_McDonald);
+        principal.seleccionarRefrigerio("125", Bebida.Gaseosa, Comida.Hamburguesa);
+        principal.seleccionarRefrigerio("126", Bebida.Agua, Comida.Perro_Caliente);
         System.out.println("-------------------------------------\n");
 
+        /*
+        
         //se realiza el sorteo
         System.out.println(principal.realizarSorteo());
         System.out.println(principal.realizarSorteo());
         System.out.println(principal.realizarSorteo());
         
 
-        */
+         */
     }
 
 }

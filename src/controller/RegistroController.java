@@ -3,7 +3,6 @@ package controller;
 import evento.Evento;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 import model.Bebida;
 import model.Comida;
 import view.RegistroView;
@@ -79,7 +78,7 @@ public class RegistroController implements ActionListener {
             RifaController rifaController = new RifaController(registroView, rifaVew);
             rifaVew.setVisible(true);
             registroView.setVisible(false);
-            
+
         }
 
     }

@@ -30,15 +30,17 @@ public class RifaController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         if (e.getActionCommand().contentEquals("Sortear")) {
-            
+            rifaVew.areaResultado.setText(evento.realizarSorteo());
         }
-        
+
         if (e.getActionCommand().contentEquals("Volver")) {
-            
+            RegistroController registroController = new RegistroController(registroView, rifaVew);
+            rifaVew.setVisible(false);
+            registroView.setVisible(true);
         }
-        
+
     }
 
 }
